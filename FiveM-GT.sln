@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveM-GT-Client", "FiveM-GT-Client\FiveM-GT-Client.csproj", "{3247F052-1CF7-4937-9675-CA54913BA210}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveM-GT-Server", "FiveM-GT-Server\FiveM-GT-Server.csproj", "{C139A938-36B2-4669-89A1-69E26DC3321F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3247F052-1CF7-4937-9675-CA54913BA210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3247F052-1CF7-4937-9675-CA54913BA210}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3247F052-1CF7-4937-9675-CA54913BA210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C139A938-36B2-4669-89A1-69E26DC3321F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C139A938-36B2-4669-89A1-69E26DC3321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C139A938-36B2-4669-89A1-69E26DC3321F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C139A938-36B2-4669-89A1-69E26DC3321F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
