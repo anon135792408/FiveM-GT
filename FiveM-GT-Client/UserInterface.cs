@@ -20,5 +20,16 @@ namespace FiveM_GT_Client
 
             }
         }
+
+        public static void InitCountdown()
+        {
+            if (!IsOpeningMoviePlaying)
+            {
+                Debug.WriteLine("[FiveM-GT] Initiating Countdown...");
+                SendNuiMessage("{\"type\":\"InitCountdown\",\"enable\":true}");
+            }
+        }
+
+
     }
 }

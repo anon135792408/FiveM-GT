@@ -2,35 +2,36 @@
 
 <head>
 	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
-	<script src="listener.js" type="text/javascript"></script>
+
+
 	<link rel="stylesheet" href="nui://FiveM-GT/html/countdown-style.css">
 </head>
 
-<body>
-	<div hidden class="ui">
-			<h1 id="digits">x</h1>
+<body hidden>
+	<div class="ui">
+		<h1 id="digits">x</h1>
 	</div>
 
-	<audio id="countdown" muted autoplay onplay="startCountdown()">
-		<source src="countdown.mp3" type="audio/ogg">
+	<audio id="countdown">
+		<source src="countdown.mp3" type="audio/mpeg">
 	</audio>
 
-	<script>
-			document.getElementById('countdown').play();
-	</script>
-
-	<script>
+<script>
+		
 		var text = ["3", "2", "1", "START"];
 		var counter = 0;
 		var elem = document.getElementById("digits");
 		var inst = null;
 
+
 		function startCountdown() {
 			inst = setInterval(change, 1000);
+			document.getElementById('countdown').play();
 		}
 
 		function change() {
-			$('.ui').show();
+			$('body').show();
+
 			elem.innerHTML = text[counter];
 			counter++;
 			if (counter >= text.length + 1) {
@@ -39,6 +40,10 @@
 			}
 		}
 	</script>
+
+	<script src="listener.js" type="text/javascript"></script>
+
+
 </body>
 
 </html>
