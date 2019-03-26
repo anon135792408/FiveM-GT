@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
-using static FiveM_GT_Client.UserInterface; 
+using static FiveM_GT_Client.UserInterface;  
 
 namespace FiveM_GT_Client
 {
@@ -11,7 +11,7 @@ namespace FiveM_GT_Client
         public Main()
         {
             EventHandlers["onClientResourceStart"] += new Action<string>(OnClientResourceStart);
-            EventHandlers["FiveM-GT:StartCountdown"] += new Action(StartCountdown);
+            EventHandlers["FiveM-GT:StartRaceIntro"] += new Action(StartRaceIntro);
         }
 
         private void OnClientResourceStart(string resourceName)
@@ -22,12 +22,21 @@ namespace FiveM_GT_Client
 
             RegisterCommand("countdown", new Action<int, List<object>, string>((source, args, raw) =>
             {
-                TriggerServerEvent("FiveM-GT:StartCountdownForAll");
+                TriggerServerEvent("FiveM-GT:StartRaceIntroForAll");
+            }), false);
+
+            RegisterCommand("camtest", new Action<int, List<object>, string>((source, args, raw) =>
+            {
+                CamUtils.InitRaceStartCam();
             }), false);
         }
 
-        private void StartCountdown()
+        private async void StartRaceIntro()
         {
+            CamUtils.InitRaceStartCam();
+            InitRaceIntro();
+
+            await Delay(7000);
             InitCountdown();
         }
     }

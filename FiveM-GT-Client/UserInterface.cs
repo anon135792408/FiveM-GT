@@ -30,6 +30,15 @@ namespace FiveM_GT_Client
             }
         }
 
+        public static void InitRaceIntro()
+        {
+            if (!IsOpeningMoviePlaying)
+            {
+                Debug.WriteLine("[FiveM-GT] Initiating Race Introduction...");
+                SendNuiMessage("{\"type\":\"InitRaceIntro\",\"enable\":true}");
+            }
+        }
+
 
     }
 }

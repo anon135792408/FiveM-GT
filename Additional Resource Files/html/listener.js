@@ -5,6 +5,8 @@ $(document).ready(function () {
         
         if (item.type == "InitCountdown") {
             startCountdown();
+        } else if (item.type == "InitRaceIntro") {
+            startRaceIntro();
         }
 
     });

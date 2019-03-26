@@ -23,15 +23,22 @@
 		var elem = document.getElementById("digits");
 		var inst = null;
 
-		var audio = new Audio('countdown.mp3');
+		var introSound = new Audio('intro.mp3');
+
+		var countdownSound = new Audio('countdown.mp3');
 
 		function startCountdown() {
-			audio.currentTime = 0;
+			countdownSound.currentTime = 0;
 			inst = setInterval(change, 1000);
 		}
 
+		function startRaceIntro() {
+			introSound.currentTime = 0;
+			introSound.play();
+		}
+
 		function change() {
-			audio.play();
+			countdownSound.play();
 			$('body').show();
 
 			elem.innerHTML = text[counter];

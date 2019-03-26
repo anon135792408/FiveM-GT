@@ -11,12 +11,12 @@ namespace FiveM_GT_Server
     {
         public UserInterface()
         {
-            EventHandlers["FiveM-GT:StartCountdownForAll"] += new Action(StartCountdownForAll);
+            EventHandlers["FiveM-GT:StartRaceIntroForAll"] += new Action(StartRaceIntroForAll);
         }
 
-        public void StartCountdownForAll()
+        public void StartRaceIntroForAll()
         {
-            TriggerClientEvent("FiveM-GT:StartCountdown");
+            TriggerClientEvent("FiveM-GT:StartRaceIntro");
         }
     }
 }
