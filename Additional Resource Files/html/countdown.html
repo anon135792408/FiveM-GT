@@ -12,30 +12,32 @@
 		<h1 id="digits">x</h1>
 	</div>
 
-	<audio id="countdown">
-		<source src="countdown.mp3" type="audio/mpeg">
+	<audio class="countdown">
+		<source src="" type="audio/mpeg">
 	</audio>
 
-<script>
-		
+	<script type="text/javascript">
+
 		var text = ["3", "2", "1", "START"];
 		var counter = 0;
 		var elem = document.getElementById("digits");
 		var inst = null;
 
+		var audio = new Audio('countdown.mp3');
 
 		function startCountdown() {
 			inst = setInterval(change, 1000);
-			document.getElementById('countdown').play();
 		}
 
 		function change() {
+			audio.play();
 			$('body').show();
 
 			elem.innerHTML = text[counter];
 			counter++;
 			if (counter >= text.length + 1) {
 				clearInterval(inst);
+				counter = 0;
 				$('body').hide();
 			}
 		}
