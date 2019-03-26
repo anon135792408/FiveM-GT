@@ -26,6 +26,7 @@
 		var audio = new Audio('countdown.mp3');
 
 		function startCountdown() {
+			audio.currentTime = 0;
 			inst = setInterval(change, 1000);
 		}
 
