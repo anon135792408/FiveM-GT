@@ -36,8 +36,13 @@ namespace FiveM_GT_Client
             CamUtils.InitRaceStartCam();
             InitRaceIntro();
 
-            await Delay(7000);
+            while(CamUtils.IsIntroCamRunning)
+            {
+                await Delay(0);
+            }
             InitCountdown();
+            await Delay(1000);
+            CamUtils.InitCountdownCam();
         }
     }
 }
