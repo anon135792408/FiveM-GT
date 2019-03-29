@@ -7,6 +7,8 @@ $(document).ready(function () {
             startCountdown();
         } else if (item.type == "InitRaceIntro") {
             startRaceIntro();
+        } else if (item.type == "PlayRandomSong") {
+            playRandomSong();
         }
 
     });

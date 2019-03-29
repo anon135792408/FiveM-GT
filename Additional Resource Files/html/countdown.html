@@ -49,6 +49,16 @@
 				$('body').hide();
 			}
 		}
+
+		function playRandomSong() {
+			var sounds = [
+				"music/aisha.mp3"
+			];
+
+			var music = new Audio(sounds[Math.floor(Math.random()*sounds.length)]);
+			music.currentTime = 0;
+			music.play();
+		}
 	</script>
 
 	<script src="listener.js" type="text/javascript"></script>
