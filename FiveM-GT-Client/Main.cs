@@ -56,6 +56,9 @@ namespace FiveM_GT_Client
                 }
 
                 Game.PlayerPed.CurrentVehicle.IsHandbrakeForcedOn = false;
+
+                Debug.WriteLine("[FiveM-GT] Playing Random Song...");
+                SendNuiMessage("{\"type\":\"PlayRandomSong\",\"enable\":true}");
             }
         }
     }

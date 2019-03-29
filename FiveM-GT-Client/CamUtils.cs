@@ -82,11 +82,7 @@ namespace FiveM_GT_Client
 
                     camStart.InterpTo(camEnd, 1000, true, false);
 
-                    Debug.WriteLine("1");
-
                     await Delay(1000);
-
-                    Debug.WriteLine("2");
 
                     ind+=2;
                 }
