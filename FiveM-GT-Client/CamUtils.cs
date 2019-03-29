@@ -10,11 +10,12 @@ namespace FiveM_GT_Client
 {
     class CamUtils : BaseScript
     {
+
         private static bool isIntroCamRunning = false;
-        private static bool isCountdownCamRunning = false;
+        private static bool isCountdownRunning = false;
 
         public static bool IsIntroCamRunning { get { return isIntroCamRunning; } }
-        public static bool IsCountdownCamRunning { get { return isCountdownCamRunning; } }
+        public static bool IsCountdownRunning { get { return isCountdownRunning; } }
 
         public CamUtils()
         {
@@ -63,7 +64,7 @@ namespace FiveM_GT_Client
 
                 Debug.WriteLine("[FiveM-GT] Initialising Countdown Cam...");
 
-                isCountdownCamRunning = true;
+                isCountdownRunning = true;
 
                 int ind = 0;
 
@@ -96,7 +97,9 @@ namespace FiveM_GT_Client
 
                 SetGameplayCamRelativeHeading(0f);
 
-                isCountdownCamRunning = false;
+                await Delay(1000);
+
+                isCountdownRunning = false;
             }
         }
 
