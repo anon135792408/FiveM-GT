@@ -18,4 +18,5 @@ files {
 	'html/intro.mp3',
 	'html/font.ttf',
 	'html/music/aisha.mp3',
+	'html/music/justaday.mp3',
 }
