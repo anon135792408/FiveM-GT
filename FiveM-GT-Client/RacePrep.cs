@@ -12,25 +12,7 @@ namespace FiveM_GT_Client
 
         public RacePrep()
         {
-            EventHandlers["onClientResourceStart"] += new Action<string>(OnClientResourceStart);
             EventHandlers["FiveM-GT:StartRaceIntro"] += new Action(StartRaceIntro);
-        }
-
-        private void OnClientResourceStart(string resourceName)
-        {
-            if (GetCurrentResourceName() != resourceName) return;
-
-            Debug.WriteLine("[FiveM-GT] Initiating FiveM Gran Turismo...");
-
-            RegisterCommand("countdown", new Action<int, List<object>, string>((source, args, raw) =>
-            {
-                TriggerServerEvent("FiveM-GT:StartRaceIntroForAll");
-            }), false);
-
-            RegisterCommand("camtest", new Action<int, List<object>, string>((source, args, raw) =>
-            {
-                CamUtils.InitRaceStartCam();
-            }), false);
         }
 
         private async void StartRaceIntro()

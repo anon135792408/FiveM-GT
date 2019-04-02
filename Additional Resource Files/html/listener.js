@@ -9,6 +9,8 @@ $(document).ready(function () {
             startRaceIntro();
         } else if (item.type == "PlayRandomSong") {
             playRandomSong();
+        } else if (item.type == "SetMusicVolume") {
+            SetMusicVolume(item.SetMusicVolume);
         }
 
     });
