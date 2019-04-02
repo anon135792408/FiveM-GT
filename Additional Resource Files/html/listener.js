@@ -10,7 +10,7 @@ $(document).ready(function () {
         } else if (item.type == "PlayRandomSong") {
             playRandomSong();
         } else if (item.type == "SetMusicVolume") {
-            setMusicVolume(item.SetMusicVolume);
+            setMusicVolume(item.MusicVolume);
         }
 
     });

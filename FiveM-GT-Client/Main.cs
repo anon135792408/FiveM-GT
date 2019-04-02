@@ -37,8 +37,8 @@ namespace FiveM_GT_Client
 
         private void SetUpPlayerConfig()
         {
-            Debug.WriteLine("[FiveM-GT] Updating user music volume variable...");
-            SendNuiMessage("{\"type\":\"SetMusicVolume\",\"value\":" + UserConfig.MusicVolume + "}");
+            Debug.WriteLine("[FiveM-GT] Updating user music volume variable to "+ UserConfig.MusicVolume + "...");
+            SendNuiMessage("{\"type\":\"SetMusicVolume\",\"MusicVolume\":" + UserConfig.MusicVolume + "}");
         }
     }
 }
