@@ -67,6 +67,10 @@
 			music.volume = musicVolume;
 			music.play();
 		}
+
+		music.onended = function() {
+			playRandomSong();
+		}
 	</script>
 
 	<script src="listener.js" type="text/javascript"></script>
