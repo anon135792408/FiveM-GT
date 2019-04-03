@@ -19,15 +19,17 @@
 	<script type="text/javascript">
 
 
+		//Vars
 		var musicVolume = 1;
 		var text = ["3", "2", "1", "START"];
 		var counter = 0;
 		var elem = document.getElementById("digits");
 		var inst = null;
 
+		//Javascript Audios
 		var introSound = new Audio('intro.mp3');
-
 		var countdownSound = new Audio('countdown.mp3');
+		var music = new Audio("music/justaday.mp3");
 
 		function startCountdown() {
 			countdownSound.currentTime = 0;
@@ -39,10 +41,12 @@
 			introSound.play();
 		}
 
+		//Set the music volume from a variable passed in from userconfig
 		function setMusicVolume(vol) {
 			musicVolume = parseFloat(vol);
 		}
 
+		//Update the countdown tiemr
 		function change() {
 			countdownSound.play();
 			$('body').show();
@@ -56,6 +60,7 @@
 			}
 		}
 
+		//Plays a random song from the html/music library, must be added to __resource.lua
 		function playRandomSong() {
 			var sounds = [
 				"music/aisha.mp3",
@@ -66,10 +71,6 @@
 			music.currentTime = 0;
 			music.volume = musicVolume;
 			music.play();
-		}
-
-		music.onended = function() {
-			playRandomSong();
 		}
 	</script>
 
