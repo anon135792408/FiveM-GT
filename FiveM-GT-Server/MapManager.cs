@@ -25,8 +25,9 @@ namespace FiveM_GT_Server
             {
                 if (DoDataFilesExist(dir))
                 {
-                    MapList.Add(dir.Replace($"resources/{GetCurrentResourceName()}/maps/", ""));
-                    Debug.WriteLine("[FiveM-GT] Found GT Map '" + new DirectoryInfo(dir).Name + "'");
+                    string MapName = dir.Replace($"resources/{GetCurrentResourceName()}/maps/", "");
+                    MapList.Add(MapName);
+                    Debug.WriteLine("[FiveM-GT] Found GT Map '" + MapName + "'");
                 }
             }
 
