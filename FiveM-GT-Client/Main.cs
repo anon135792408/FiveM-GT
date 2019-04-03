@@ -10,6 +10,8 @@ namespace FiveM_GT_Client
 {
     class Main : BaseScript
     {
+        public static List<string> MapList = new List<string>();
+
         public Main()
         {
             EventHandlers["onClientResourceStart"] += new Action<string>(OnClientResourceStart);
