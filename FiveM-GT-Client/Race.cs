@@ -13,6 +13,7 @@ namespace FiveM_GT_Client
         public Race()
         {
             EventHandlers["FiveM-GT:StartRace"] += new Action<string>(StartRace);
+            EventHandlers["FiveM-GT:SpawnPlayerInMap"] += new Action<Vector3, float>(SpawnPlayerInMap);
         }
 
         public void StartRace(string map)
@@ -51,6 +52,12 @@ namespace FiveM_GT_Client
                 Debug.WriteLine("[FiveM-GT] Playing Random Song...");
                 SendNuiMessage("{\"type\":\"PlayRandomSong\",\"enable\":true}");
             }
+        }
+
+        private async void SpawnPlayerInMap(Vector3 position, float heading)
+        {
+            Vehicle v = await World.CreateVehicle(VehicleHash.Blista2, position, heading);
+            SetPedIntoVehicle(Game.PlayerPed.Handle, v.Handle, -1);
         }
     }
 }
