@@ -44,8 +44,10 @@ namespace FiveM_GT_Server
             }
         }
 
-        public static string GetMapName(string mapDir)
+        public static string GetMapName(string map)
         {
+            string mapDir = $"resources/{GetCurrentResourceName()}/maps/" + map;
+
             if (!DoDataFilesExist(mapDir))
                 return null;
 

@@ -8,4 +8,3 @@ D:\Dev Projects\FiveM-GT\FiveM-GT-Server\obj\Debug\FiveM-GT-Server.net.pdb
 D:\Dev Projects\FiveM-GT\FiveM-GT-Server\bin\Debug\Newtonsoft.Json.dll
 D:\Dev Projects\FiveM-GT\FiveM-GT-Server\bin\Debug\Newtonsoft.Json.pdb
 D:\Dev Projects\FiveM-GT\FiveM-GT-Server\bin\Debug\Newtonsoft.Json.xml
-D:\Dev Projects\FiveM-GT\FiveM-GT-Server\obj\Debug\FiveM-GT-Server.csprojAssemblyReference.cache
