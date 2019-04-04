@@ -19,6 +19,7 @@ namespace FiveM_GT_Client
         {
             Debug.WriteLine("[FiveM-GT] Updating found maps...");
             Player.MapList = mapList;
+            Debug.WriteLine("[FiveM-GT] Found "+Player.MapList.Count+" maps!");
         }
     }
 }
