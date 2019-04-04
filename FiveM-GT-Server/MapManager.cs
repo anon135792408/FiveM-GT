@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CitizenFX.Core;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using static CitizenFX.Core.Native.API;
 
 namespace FiveM_GT_Server
@@ -37,6 +39,37 @@ namespace FiveM_GT_Server
             {
                 Debug.WriteLine(item);
             }
+        }
+
+        public static IDictionary<string, object> LoadMapJson(string file)
+        {
+            using (StreamReader r = new StreamReader(file))
+            {
+                return JsonConvert.DeserializeObject<IDictionary<String, Object>>(r.ReadToEnd());
+            }
+        }
+
+        public static List<string> LoadMapSpawns(string map)
+        {
+            List<string> spawns = new List<string>();
+            string mapDir = $"resources/{GetCurrentResourceName()}/maps/"+map;
+
+            if (!DoDataFilesExist(mapDir))
+                return null;
+
+            string file = mapDir + "/spawn.json";
+
+            foreach(var item in LoadMapJson(file))
+            {
+                spawns.Add(item.Value.ToString());
+            }
+
+            foreach (string s in spawns)
+            {
+                Debug.WriteLine(s);
+            }
+
+            return spawns;
         }
 
         public static bool DoDataFilesExist(string dir)

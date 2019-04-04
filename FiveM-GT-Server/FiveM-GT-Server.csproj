@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="MapManager.cs" />
     <Compile Include="Status.cs" />
-    <Compile Include="UserInterface.cs" />
+    <Compile Include="Race.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

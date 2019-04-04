@@ -7,9 +7,9 @@ using CitizenFX.Core;
 
 namespace FiveM_GT_Server
 {
-    public class UserInterface : BaseScript
+    public class Race : BaseScript
     {
-        public UserInterface()
+        public Race()
         {
             EventHandlers["FiveM-GT:StartRaceForAll"] += new Action<Player, string>(StartRaceForAll);
         }
@@ -20,6 +20,7 @@ namespace FiveM_GT_Server
             {
                 Debug.WriteLine("[FiveM-GT] " + player.Name + " has requested to start a race with the map '" + map + "'");
                 TriggerClientEvent("FiveM-GT:StartRace", map);
+                List<string> spawns = MapManager.LoadMapSpawns(map);
             }
             else
             {
