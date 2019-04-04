@@ -18,7 +18,7 @@ namespace FiveM_GT_Client
 
         public void StartRace(string map)
         {
-            if (IsPlayerPlaying)
+            if (IsPlayerPlaying && Player.ChosenVehicleHash != 0)
             {
                 Debug.WriteLine("[FiveM-GT] Starting race on map " + map);
                 StartRaceIntro();
@@ -56,7 +56,7 @@ namespace FiveM_GT_Client
 
         private async void SpawnPlayerInMap(Vector3 position, float heading)
         {
-            Vehicle v = await World.CreateVehicle(VehicleHash.Blista2, position, heading);
+            Vehicle v = await World.CreateVehicle(new Model((int)Player.ChosenVehicleHash), position, heading);
             SetPedIntoVehicle(Game.PlayerPed.Handle, v.Handle, -1);
         }
     }

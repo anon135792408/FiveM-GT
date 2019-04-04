@@ -27,6 +27,12 @@ namespace FiveM_GT_Client
                 TriggerServerEvent("FiveM-GT:StartRaceForAll", args[0]);
             }), false);
 
+            RegisterCommand("choosecar", new Action<int, List<object>, string>((source, args, raw) =>
+            {
+                Player.UpdateChosenVehicle(args[0].ToString());
+
+            }), false);
+
             RegisterCommand("camtest", new Action<int, List<object>, string>((source, args, raw) =>
             {
                 CamUtils.InitRaceStartCam();
