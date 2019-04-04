@@ -9,7 +9,10 @@
 
 <body hidden>
 	<div class="ui">
-		<h1 id="digits">x</h1>
+		<h1 id="digits" hidden>x</h1>
+		<div class="position">
+			<h1>1st</h1>
+		</div>
 	</div>
 
 	<audio class="countdown">
@@ -37,6 +40,7 @@
 		}
 
 		function startRaceIntro() {
+			$('body').show();
 			introSound.currentTime = 0;
 			introSound.play();
 		}
@@ -49,14 +53,14 @@
 		//Update the countdown tiemr
 		function change() {
 			countdownSound.play();
-			$('body').show();
+			$('#digits').show();
 
 			elem.innerHTML = text[counter];
 			counter++;
 			if (counter >= text.length + 1) {
 				clearInterval(inst);
 				counter = 0;
-				$('body').hide();
+				$('#digits').hide();
 			}
 		}
 

@@ -6,10 +6,11 @@
 
 body {
 	margin: 0;
-	font-size: 17px;
+    font-size: 17px;
 }
 
 * {
+    overflow: hidden;
 	font: 128px "Helvetica 97 Condensed", Verdana;
 }
 
@@ -19,17 +20,27 @@ h1 {
  }
 
 .ui {
-	position:fixed; /*it can be fixed too*/
-        left:0; right:0;
-        top:50%; bottom:0;
-        margin: 0 auto;
-        transform: translate(0%,-50%);
-        /*this to solve "the content will not be cut when the window is smaller than the content": */
-        max-width:100%;
-        max-height:100%;
-        overflow:auto;
-        text-align: center;
-        color: rgb(223, 119, 1);
+    color: rgb(223, 119, 1);
+}
+
+#digits {
+    position:fixed;
+    left:0; right:0;
+    top:50%; bottom:0;
+    margin: 0 auto;
+    transform: translate(0%,-50%);
+    /*this to solve "the content will not be cut when the window is smaller than the content": */
+    max-width:100%;
+    max-height:100%;
+    overflow:auto;
+    text-align: center;
+}
+
+.position {
+    position: fixed;
+    top: -4%;
+    left: 2%;
+    font-size: 72px;
 }
   
 #wrap {
