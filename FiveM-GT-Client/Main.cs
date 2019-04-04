@@ -22,9 +22,9 @@ namespace FiveM_GT_Client
 
             Debug.WriteLine("[FiveM-GT] Initiating FiveM Gran Turismo...");
 
-            RegisterCommand("countdown", new Action<int, List<object>, string>((source, args, raw) =>
+            RegisterCommand("startrace", new Action<int, List<object>, string>((source, args, raw) =>
             {
-                TriggerServerEvent("FiveM-GT:StartRaceIntroForAll");
+                TriggerServerEvent("FiveM-GT:StartRaceForAll", args[0]);
             }), false);
 
             RegisterCommand("camtest", new Action<int, List<object>, string>((source, args, raw) =>

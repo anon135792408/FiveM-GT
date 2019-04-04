@@ -11,12 +11,21 @@ namespace FiveM_GT_Server
     {
         public UserInterface()
         {
-            EventHandlers["FiveM-GT:StartRaceIntroForAll"] += new Action(StartRaceIntroForAll);
+            EventHandlers["FiveM-GT:StartRaceForAll"] += new Action<Player, string>(StartRaceForAll);
         }
 
-        public void StartRaceIntroForAll()
+        public void StartRaceForAll([FromSource]Player player, string map)
         {
-            TriggerClientEvent("FiveM-GT:StartRaceIntro");
+            if (MapManager.MapList.Contains(map))
+            {
+                Debug.WriteLine("[FiveM-GT] " + player.Name + " has requested to start a race with the map '" + map + "'");
+                TriggerClientEvent("FiveM-GT:StartRace", map);
+            }
+            else
+            {
+                Debug.WriteLine("[FiveM-GT] " + player.Name + " attempted to start a race with a map that was not found '" + map + "'");
+                player.TriggerEvent("chatMessage", "[FiveM-GT] The map you requested '"+ map +"' was not found");
+            }
         }
     }
 }

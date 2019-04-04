@@ -6,13 +6,22 @@ using static FiveM_GT_Client.UserInterface;
 
 namespace FiveM_GT_Client
 {
-    public class RacePrep : BaseScript
+    public class Race : BaseScript
     {
         private bool IsPlayerPlaying = true;
 
-        public RacePrep()
+        public Race()
         {
-            EventHandlers["FiveM-GT:StartRaceIntro"] += new Action(StartRaceIntro);
+            EventHandlers["FiveM-GT:StartRace"] += new Action<string>(StartRace);
+        }
+
+        public void StartRace(string map)
+        {
+            if (IsPlayerPlaying)
+            {
+                Debug.WriteLine("[FiveM-GT] Starting race on map " + map);
+                StartRaceIntro();
+            }
         }
 
         private async void StartRaceIntro()
