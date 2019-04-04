@@ -41,7 +41,11 @@ namespace FiveM_GT_Server
 
         public static bool DoDataFilesExist(string dir)
         {
-            string[] FilesToFind = { "spawn.json" };
+            string[] FilesToFind = {
+                "spawn.json",
+                "checkpoints.json",
+                "mapinfo.json"
+            };
 
             foreach (string s in FilesToFind) {
                 if (!File.Exists(dir + "/" + s))
