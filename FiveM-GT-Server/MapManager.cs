@@ -34,11 +34,6 @@ namespace FiveM_GT_Server
             }
 
             TriggerClientEvent("FiveM-GT:LoadMapList", MapList);
-
-            foreach (var item in MapList)
-            {
-                Debug.WriteLine(item);
-            }
         }
 
         public static IDictionary<string, object> LoadMapJson(string file)
@@ -62,11 +57,6 @@ namespace FiveM_GT_Server
             foreach(var item in LoadMapJson(file))
             {
                 spawns.Add(item.Value.ToString());
-            }
-
-            foreach (string s in spawns)
-            {
-                Debug.WriteLine(s);
             }
 
             return spawns;
