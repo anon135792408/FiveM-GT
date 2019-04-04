@@ -21,11 +21,43 @@ namespace FiveM_GT_Server
                 Debug.WriteLine("[FiveM-GT] " + player.Name + " has requested to start a race with the map '" + map + "'");
                 TriggerClientEvent("FiveM-GT:StartRace", map);
                 List<string> spawns = MapManager.LoadMapSpawns(map);
+                AssignRaceSpawnPositions(Players, spawns);
             }
             else
             {
                 Debug.WriteLine("[FiveM-GT] " + player.Name + " attempted to start a race with a map that was not found '" + map + "'");
                 player.TriggerEvent("chatMessage", "[FiveM-GT] The map you requested '"+ map +"' was not found");
+            }
+        }
+
+        public bool AssignRaceSpawnPositions(PlayerList players, List<string> spawns)
+        {
+            Player[] playerList = players.ToArray();
+            List<string> unusedSpawns = new List<string>(spawns);
+
+            Random rand = new Random();
+
+            if (playerList.Length <= unusedSpawns.Count)
+            {
+                for (int i = 0; i < playerList.Length; i++)
+                {
+                    int spawnIndex = rand.Next(unusedSpawns.Count);
+                    string[] spawnInfo = unusedSpawns[spawnIndex].Split(',');
+
+                    Vector3 position = new Vector3(float.Parse(spawnInfo[0]), float.Parse(spawnInfo[1]), float.Parse(spawnInfo[2]));
+                    float heading = float.Parse(spawnInfo[3]);
+
+                    Debug.WriteLine("[FiveM-GT] Assigning " + playerList[i].Name + " to spawn position " + (spawnIndex+1).ToString());
+                    playerList[i].TriggerEvent("FiveM-GT:SpawnPlayerInMap", position, heading);
+
+                    unusedSpawns.Remove(unusedSpawns[spawnIndex]);
+                }
+                return true;
+            }
+            else
+            {
+                Debug.WriteLine("[FiveM-GT] Chosen map does not have the capacity to support " + playerList.Length + " players!");
+                return false;
             }
         }
     }
