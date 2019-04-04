@@ -44,6 +44,24 @@ namespace FiveM_GT_Server
             }
         }
 
+        public static string GetMapName(string mapDir)
+        {
+            if (!DoDataFilesExist(mapDir))
+                return null;
+
+            string file = mapDir + "/mapinfo.json";
+
+            foreach (var item in LoadMapJson(file))
+            {
+                if (item.Key.ToString().Equals("name"))
+                {
+                    return item.Value.ToString();
+                }
+            }
+
+            return "NO-NAME";
+        }
+
         public static List<string> LoadMapSpawns(string map)
         {
             List<string> spawns = new List<string>();
