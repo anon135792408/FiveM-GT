@@ -19,9 +19,9 @@ namespace FiveM_GT_Server
             if (MapManager.MapList.Contains(map))
             {
                 Debug.WriteLine("[FiveM-GT] " + player.Name + " has requested to start a race with the map '" + map + "'");
-                TriggerClientEvent("FiveM-GT:StartRace", map);
                 List<string> spawns = MapManager.LoadMapSpawns(map);
-                AssignRaceSpawnPositions(Players, spawns);
+                if (AssignRaceSpawnPositions(Players, spawns))
+                    TriggerClientEvent("FiveM-GT:StartRace", map);
             }
             else
             {
