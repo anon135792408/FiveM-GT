@@ -41,11 +41,16 @@ namespace FiveM_GT_Server
 
         public static bool DoDataFilesExist(string dir)
         {
-            if (File.Exists(dir + "/spawn.json"))
-            {
-                return true;
+            string[] FilesToFind = { "spawn.json" };
+
+            foreach (string s in FilesToFind) {
+                if (!File.Exists(dir + "/" + s))
+                {
+                    return false;
+                }
             }
-            return false;
+
+            return true;
         }
     }
 }
