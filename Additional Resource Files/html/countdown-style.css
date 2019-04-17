@@ -42,6 +42,14 @@ h1 {
     left: 2%;
     font-size: 72px;
 }
+
+.lap h1 {
+    position: fixed;
+    top: 3%;
+    left: 85%;
+    font-size: 40pt;
+    -webkit-text-stroke-width: 2px;
+}
   
 #wrap {
 	position: fixed;
