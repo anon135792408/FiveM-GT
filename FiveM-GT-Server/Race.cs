@@ -22,6 +22,8 @@ namespace FiveM_GT_Server
                 List<string> spawns = MapManager.LoadMapSpawns(map);
                 if (AssignRaceSpawnPositions(Players, spawns))
                     TriggerClientEvent("FiveM-GT:StartRace", MapManager.GetMapName(map), laps);
+
+                MapManager.SendCheckpointsToPlayer(player, map);
             }
             else
             {

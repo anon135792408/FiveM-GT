@@ -44,6 +44,39 @@ namespace FiveM_GT_Server
             }
         }
 
+        public static void SendCheckpointsToPlayer(Player player, string map)
+        {
+            if (MapList.Contains(map))
+            {
+                Debug.WriteLine("[FiveM-GT] " + player.Name + " is downloading checkpoints for map " + GetMapName(map) + "...");
+                List<Vector3> checkpoints = RetrieveCheckpoints(map);
+                player.TriggerEvent("FiveM-GT:DownloadRaceCheckpoints", checkpoints);
+            }
+        }
+
+        public static List<Vector3> RetrieveCheckpoints(string map)
+        {
+            Debug.WriteLine("[FiveM-GT] Retrieving checkpoints for map " + GetMapName(map));
+
+            List<Vector3> checkpoints = new List<Vector3>();
+            string mapDir = $"resources/{GetCurrentResourceName()}/maps/" + map;
+
+            if (!DoDataFilesExist(mapDir))
+                return null;
+
+            string file = mapDir + "/checkpoints.json";
+
+            foreach (var item in LoadMapJson(file))
+            {
+                string[] coords = item.ToString().Split(',');
+                Vector3 coord = new Vector3(float.Parse(coords[1]), float.Parse(coords[2]), float.Parse(coords[3]));
+                Debug.WriteLine("[FiveM-GT] Parsing map checkpoint " + coord.ToString());
+                checkpoints.Add(coord);
+            }
+
+            return checkpoints;
+        }
+
         public static string GetMapName(string map)
         {
             string mapDir = $"resources/{GetCurrentResourceName()}/maps/" + map;

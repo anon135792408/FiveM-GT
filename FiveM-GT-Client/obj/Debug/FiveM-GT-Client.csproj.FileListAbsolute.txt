@@ -5,4 +5,3 @@ D:\Dev Projects\FiveM-GT\FiveM-GT-Client\bin\Debug\CitizenFX.Core.dll
 D:\Dev Projects\FiveM-GT\FiveM-GT-Client\obj\Debug\FiveM-GT-Client.csproj.CopyComplete
 D:\Dev Projects\FiveM-GT\FiveM-GT-Client\obj\Debug\FiveM-GT-Client.net.dll
 D:\Dev Projects\FiveM-GT\FiveM-GT-Client\obj\Debug\FiveM-GT-Client.net.pdb
-D:\Dev Projects\FiveM-GT\FiveM-GT-Client\obj\Debug\FiveM-GT-Client.csprojAssemblyReference.cache

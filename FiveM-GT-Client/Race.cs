@@ -11,11 +11,13 @@ namespace FiveM_GT_Client
         private bool IsPlayerPlaying = true;
         private int Laps = 1;
         private int CurrentLap = 1;
+        private List<Vector3> Checkpoints;
 
         public Race()
         {
             EventHandlers["FiveM-GT:StartRace"] += new Action<string, int>(StartRace);
             EventHandlers["FiveM-GT:SpawnPlayerInMap"] += new Action<Vector3, float>(SpawnPlayerInMap);
+            EventHandlers["FiveM-GT:DownloadRaceCheckpoints"] += new Action<List<dynamic>>(DownloadRaceCheckpoints);
         }
 
         public void StartRace(string map, int laps)
@@ -27,6 +29,19 @@ namespace FiveM_GT_Client
                 SendNuiMessage("{\"type\":\"SetLaps\",\"Laps\":" + Laps.ToString() + "}");
                 StartRaceIntro();
             }
+        }
+
+        private void DownloadRaceCheckpoints(List<dynamic> checkpoints)
+        {
+            Checkpoints = new List<Vector3>();
+
+            foreach (object o in checkpoints)
+            {
+                Checkpoints.Add((Vector3)o);
+                Debug.WriteLine("[FiveM-GT] Parsing checkpoint " + ((Vector3)o).ToString());
+            }
+
+            Debug.WriteLine("[FiveM-GT] Parsed " + Checkpoints.Count + " race checkpoints...");
         }
 
         private async void StartRaceIntro()
