@@ -9,18 +9,22 @@ namespace FiveM_GT_Client
     public class Race : BaseScript
     {
         private bool IsPlayerPlaying = true;
+        private int Laps = 1;
+        private int CurrentLap = 1;
 
         public Race()
         {
-            EventHandlers["FiveM-GT:StartRace"] += new Action<string>(StartRace);
+            EventHandlers["FiveM-GT:StartRace"] += new Action<string, int>(StartRace);
             EventHandlers["FiveM-GT:SpawnPlayerInMap"] += new Action<Vector3, float>(SpawnPlayerInMap);
         }
 
-        public void StartRace(string map)
+        public void StartRace(string map, int laps)
         {
             if (IsPlayerPlaying && Player.ChosenVehicleHash != 0)
             {
-                Debug.WriteLine("[FiveM-GT] Starting race on map " + map);
+                Debug.WriteLine("[FiveM-GT] Starting "+laps.ToString()+" lap race on map " + map);
+                Laps = laps;
+                SendNuiMessage("{\"type\":\"SetLaps\",\"Laps\":" + Laps.ToString() + "}");
                 StartRaceIntro();
             }
         }

@@ -24,7 +24,7 @@ namespace FiveM_GT_Client
 
             RegisterCommand("startrace", new Action<int, List<object>, string>((source, args, raw) =>
             {
-                TriggerServerEvent("FiveM-GT:StartRaceForAll", args[0].ToString().Replace("\"", ""));
+                TriggerServerEvent("FiveM-GT:StartRaceForAll", args[0].ToString().Replace("\"", ""), int.Parse(args[1].ToString()));
             }), false);
 
             RegisterCommand("choosecar", new Action<int, List<object>, string>((source, args, raw) =>

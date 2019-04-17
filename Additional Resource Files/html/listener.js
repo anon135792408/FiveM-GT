@@ -11,6 +11,8 @@ $(document).ready(function () {
             playRandomSong();
         } else if (item.type == "SetMusicVolume") {
             setMusicVolume(item.MusicVolume);
+        } else if (item.type == "SetLaps") {
+            setRaceLaps(item.Laps);
         }
 
     });

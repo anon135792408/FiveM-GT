@@ -11,21 +11,21 @@ namespace FiveM_GT_Server
     {
         public Race()
         {
-            EventHandlers["FiveM-GT:StartRaceForAll"] += new Action<Player, string>(StartRaceForAll);
+            EventHandlers["FiveM-GT:StartRaceForAll"] += new Action<Player, string, int>(StartRaceForAll);
         }
 
-        public void StartRaceForAll([FromSource]Player player, string map)
+        public void StartRaceForAll([FromSource]Player player, string map, int laps)
         {
             if (MapManager.MapList.Contains(map))
             {
-                Debug.WriteLine("[FiveM-GT] " + player.Name + " has requested to start a race with the map '" + map + "'");
+                Debug.WriteLine("[FiveM-GT] " + player.Name + " has requested to start a "+laps.ToString()+" lap race with the map '" + map + "'");
                 List<string> spawns = MapManager.LoadMapSpawns(map);
                 if (AssignRaceSpawnPositions(Players, spawns))
-                    TriggerClientEvent("FiveM-GT:StartRace", MapManager.GetMapName(map));
+                    TriggerClientEvent("FiveM-GT:StartRace", MapManager.GetMapName(map), laps);
             }
             else
             {
-                Debug.WriteLine("[FiveM-GT] " + player.Name + " attempted to start a race with a map that was not found '" + map + "'");
+                Debug.WriteLine("[FiveM-GT] " + player.Name + " attempted to start a " + laps.ToString() + " lap race with a map that was not found '" + map + "'");
                 player.TriggerEvent("chatMessage", "[FiveM-GT] The map you requested '"+ map +"' was not found");
             }
         }

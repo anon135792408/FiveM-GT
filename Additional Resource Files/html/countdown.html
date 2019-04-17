@@ -14,7 +14,7 @@
 			<h1>1st</h1>
 		</div>
 		<div class="lap">
-			<h1>Lap 1/3</h1>
+			<h1 id="lapstring">Lap 1/3</h1>
 		</div>
 	</div>
 
@@ -51,6 +51,16 @@
 		//Set the music volume from a variable passed in from userconfig
 		function setMusicVolume(vol) {
 			musicVolume = parseFloat(vol);
+		}
+
+		var raceLaps;
+		function setRaceLaps(laps) {
+			document.getElementById("lapstring").innerHTML = "Lap 1/" + laps;
+			raceLaps = laps;
+		}
+
+		function setRaceCurrentLap(lap) {
+			document.getElementById("lapstring").innerHTML = "Lap "+lap+"/"+raceLaps;
 		}
 
 		//Update the countdown tiemr
