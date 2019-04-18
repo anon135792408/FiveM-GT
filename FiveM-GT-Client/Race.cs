@@ -14,6 +14,7 @@ namespace FiveM_GT_Client
         private int CurrentLap = 1;
         private List<Vector3> Checkpoints;
         private Vector3 CurrentCheckpoint;
+        private int CheckpointIndex = 0;
 
         public Race()
         {
@@ -48,6 +49,22 @@ namespace FiveM_GT_Client
             else
             {
                 World.DrawMarker(MarkerType.VerticalCylinder, CurrentCheckpoint, Vector3.Zero, Vector3.Zero, new Vector3(15f, 15f, 15f), System.Drawing.Color.FromArgb(255, 255, 255), false, true, false);
+                if (Game.PlayerPed.IsInRangeOf(CurrentCheckpoint, 15f))
+                {
+                    if (CheckpointIndex < Checkpoints.Count - 1)
+                    {
+                        Debug.WriteLine("[FiveM-GT] Passed checkpoint " + CheckpointIndex.ToString() + "!");
+                        CheckpointIndex++;
+                        CurrentCheckpoint = Checkpoints[CheckpointIndex];
+                    }
+                    else
+                    {
+                        Debug.WriteLine("[FiveM-GT] Passed checkpoint " + CheckpointIndex.ToString() + "!");
+                        CheckpointIndex = 0;
+                        CurrentCheckpoint = Checkpoints[CheckpointIndex];
+                        CurrentLap++;
+                    }
+                }
             }
         }
 
