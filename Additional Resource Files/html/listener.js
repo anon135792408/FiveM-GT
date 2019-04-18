@@ -13,6 +13,10 @@ $(document).ready(function () {
             setMusicVolume(item.MusicVolume);
         } else if (item.type == "SetLaps") {
             setRaceLaps(item.Laps);
+        } else if (item.type == "StopAllMusic") {
+            stopAllMusic();
+        } else if (item.type == "PlayFinishingSong") {
+            playFinishingSong();
         }
 
     });

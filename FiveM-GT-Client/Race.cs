@@ -43,6 +43,7 @@ namespace FiveM_GT_Client
                 if (Game.PlayerPed.IsInRangeOf(CurrentCheckpoint, 15f))
                 {
                     Debug.WriteLine("[FiveM-GT] You have finished the race!");
+                    EndRaceLocally();
                     Tick -= CheckpointTick;
                 }
             }
@@ -63,6 +64,7 @@ namespace FiveM_GT_Client
                         CheckpointIndex = 0;
                         CurrentCheckpoint = Checkpoints[CheckpointIndex];
                         CurrentLap++;
+                        SendNuiMessage("{\"type\":\"SetLaps\",\"Laps\":" + CurrentLap.ToString() + "}");
                     }
                 }
             }
@@ -79,6 +81,15 @@ namespace FiveM_GT_Client
             }
 
             Debug.WriteLine("[FiveM-GT] Parsed " + Checkpoints.Count + " race checkpoints...");
+        }
+
+        private async void EndRaceLocally()
+        {
+            Debug.WriteLine("[FiveM-GT] Stopping Music...");
+            SendNuiMessage("{\"type\":\"StopAllMusic\",\"enable\":true}");
+
+            Debug.WriteLine("[FiveM-GT] Playing Race Finish Music...");
+            SendNuiMessage("{\"type\":\"PlayFinishingSong\",\"enable\":true}");
         }
 
         private async void StartRaceIntro()

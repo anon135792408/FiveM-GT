@@ -35,6 +35,7 @@
 		//Javascript Audios
 		var introSound = new Audio('intro.mp3');
 		var countdownSound = new Audio('countdown.mp3');
+		var finishSound = new Audio('finish.mp3');
 		var music = new Audio("music/justaday.mp3");
 
 		function startCountdown() {
@@ -46,6 +47,17 @@
 			$('body').show();
 			introSound.currentTime = 0;
 			introSound.play();
+		}
+
+		function playFinishingSong() {
+			finishSound.currentTime = 0;
+			finishSound.play();
+			elem.innerHTML = "FINISH";
+			$('#digits').show();
+		}
+
+		function stopAllMusic() {
+			music.pause();
 		}
 
 		//Set the music volume from a variable passed in from userconfig

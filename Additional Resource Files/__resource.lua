@@ -19,6 +19,7 @@ files {
 	'html/listener.js',
 	'html/countdown.mp3',
 	'html/intro.mp3',
+	'html/finish.mp3',
 	'html/font.ttf',
 	'html/music/aisha.mp3',
 	'html/music/justaday.mp3',
