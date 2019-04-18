@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
 using static FiveM_GT_Client.UserInterface;
@@ -12,6 +13,7 @@ namespace FiveM_GT_Client
         private int Laps = 1;
         private int CurrentLap = 1;
         private List<Vector3> Checkpoints;
+        private Vector3 CurrentCheckpoint;
 
         public Race()
         {
@@ -28,6 +30,24 @@ namespace FiveM_GT_Client
                 Laps = laps;
                 SendNuiMessage("{\"type\":\"SetLaps\",\"Laps\":" + Laps.ToString() + "}");
                 StartRaceIntro();
+            }
+        }
+
+        private async Task CheckpointTick()
+        {
+            if (CurrentLap == Laps && Checkpoints[Checkpoints.Count-1].Equals(CurrentCheckpoint))
+            {
+                World.DrawMarker(MarkerType.VerticalCylinder, CurrentCheckpoint, Vector3.Zero, Vector3.Zero, new Vector3(15f, 15f, 15f), System.Drawing.Color.FromArgb(255, 255, 255), false, true, false);
+                World.DrawMarker(MarkerType.CheckeredFlagCircle, CurrentCheckpoint, Vector3.Zero, Vector3.Zero, new Vector3(15f, 15f, 15f), System.Drawing.Color.FromArgb(255, 255, 255), false, true, false);
+                if (Game.PlayerPed.IsInRangeOf(CurrentCheckpoint, 15f))
+                {
+                    Debug.WriteLine("[FiveM-GT] You have finished the race!");
+                    Tick -= CheckpointTick;
+                }
+            }
+            else
+            {
+                World.DrawMarker(MarkerType.VerticalCylinder, CurrentCheckpoint, Vector3.Zero, Vector3.Zero, new Vector3(15f, 15f, 15f), System.Drawing.Color.FromArgb(255, 255, 255), false, true, false);
             }
         }
 
@@ -70,6 +90,8 @@ namespace FiveM_GT_Client
 
                 Debug.WriteLine("[FiveM-GT] Playing Random Song...");
                 SendNuiMessage("{\"type\":\"PlayRandomSong\",\"enable\":true}");
+                CurrentCheckpoint = Checkpoints[0];
+                Tick += CheckpointTick;
             }
         }
 
