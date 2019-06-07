@@ -64,7 +64,7 @@ namespace FiveM_GT_Client
                         CheckpointIndex = 0;
                         CurrentCheckpoint = Checkpoints[CheckpointIndex];
                         CurrentLap++;
-                        SendNuiMessage("{\"type\":\"SetLaps\",\"Laps\":" + CurrentLap.ToString() + "}");
+                        SendNuiMessage("{\"type\":\"SetRaceCurrentLap\",\"Lap\":" + CurrentLap.ToString() + "}");
                     }
                 }
             }
@@ -97,10 +97,16 @@ namespace FiveM_GT_Client
 
         private async void StartRaceIntro()
         {
+            Debug.WriteLine("[FiveM-GT] Initiating race introduction set up...");
             if (IsPlayerPlaying)
             {
+                await Delay(1000);
+
                 Game.PlayerPed.CurrentVehicle.IsHandbrakeForcedOn = true;
+                Debug.WriteLine("[FiveM-GT] Setting up introduction camera...");
                 CamUtils.InitRaceStartCam();
+
+                Debug.WriteLine("[FiveM-GT] Initiating race introduction...");
                 InitRaceIntro();
 
                 while (CamUtils.IsIntroCamRunning)
@@ -109,6 +115,9 @@ namespace FiveM_GT_Client
                 }
 
                 InitCountdown();
+
+                Debug.WriteLine("[FiveM-GT] Initiating Countdown...");
+
                 await Delay(1000);
                 CamUtils.InitCountdownCam();
 
@@ -121,7 +130,9 @@ namespace FiveM_GT_Client
 
                 Debug.WriteLine("[FiveM-GT] Playing Random Song...");
                 SendNuiMessage("{\"type\":\"PlayRandomSong\",\"enable\":true}");
+                Debug.WriteLine("[FiveM-GT] Resetting Current Checkpoint...");
                 CurrentCheckpoint = Checkpoints[0];
+                Debug.WriteLine("[FiveM-GT] Initialising checkpoint system...");
                 Tick += CheckpointTick;
             }
         }
@@ -129,6 +140,7 @@ namespace FiveM_GT_Client
         private async void SpawnPlayerInMap(Vector3 position, float heading)
         {
             Vehicle v = await World.CreateVehicle(new Model((int)Player.ChosenVehicleHash), position, heading);
+            await Delay(250);
             SetPedIntoVehicle(Game.PlayerPed.Handle, v.Handle, -1);
         }
     }

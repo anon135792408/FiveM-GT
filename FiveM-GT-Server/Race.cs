@@ -23,7 +23,11 @@ namespace FiveM_GT_Server
                 if (AssignRaceSpawnPositions(Players, spawns))
                     TriggerClientEvent("FiveM-GT:StartRace", MapManager.GetMapName(map), laps);
 
-                MapManager.SendCheckpointsToPlayer(player, map);
+
+                foreach (Player p in Players)
+                {
+                    MapManager.SendCheckpointsToPlayer(p, map);
+                }
             }
             else
             {
