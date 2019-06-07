@@ -90,6 +90,9 @@ namespace FiveM_GT_Client
 
             Debug.WriteLine("[FiveM-GT] Playing Race Finish Music...");
             SendNuiMessage("{\"type\":\"PlayFinishingSong\",\"enable\":true}");
+
+            Player.FollowRaceCoordinates(Checkpoints);
+
         }
 
         private async void StartRaceIntro()

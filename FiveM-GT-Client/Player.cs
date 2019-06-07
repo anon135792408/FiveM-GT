@@ -28,5 +28,29 @@ namespace FiveM_GT_Client
 
             Debug.WriteLine("[FiveM-GT] Chosen vehicle set to " + GetDisplayNameFromVehicleModel(ChosenVehicleHash));
         }
+
+        public async static void FollowRaceCoordinates(List<Vector3> coords)
+        {
+            IEnumerator<Vector3> currCoord = coords.GetEnumerator();
+
+            while (true)
+            {
+                await Delay(250);
+
+                if (!currCoord.MoveNext())
+                    break;
+
+                Game.PlayerPed.Task.DriveTo(Game.PlayerPed.CurrentVehicle, currCoord.Current, 5f, 30f);
+                while (!Game.PlayerPed.IsInRangeOf(currCoord.Current, 5.0f))
+                {
+                    await Delay(250);
+                    Debug.WriteLine("Attempting to drive to: " + currCoord.Current.ToString());
+                    Debug.WriteLine("Or " + coords[0].ToString());
+                }
+
+                if (!currCoord.MoveNext())
+                    break;
+            }
+        }
     }
 }
