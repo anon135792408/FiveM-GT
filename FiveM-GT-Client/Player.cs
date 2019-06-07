@@ -38,7 +38,10 @@ namespace FiveM_GT_Client
                 await Delay(250);
 
                 if (!currCoord.MoveNext())
+                {
+                    Debug.WriteLine("[FiveM-GT] FollowRaceCoordinates Attempted to find first coordinate, none found!");
                     break;
+                }
 
                 Game.PlayerPed.Task.DriveTo(Game.PlayerPed.CurrentVehicle, currCoord.Current, 5f, 30f);
                 while (!Game.PlayerPed.IsInRangeOf(currCoord.Current, 5.0f))

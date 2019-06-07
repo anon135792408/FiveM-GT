@@ -16,8 +16,10 @@ body {
 
 h1 {
 	-webkit-text-stroke-width: 4px;
-	-webkit-text-stroke-color: black;
- }
+    -webkit-text-stroke-color: black;
+    font-style: italic;
+    padding: 10px;
+}
 
 .ui {
     color: rgb(223, 119, 1);
@@ -41,6 +43,7 @@ h1 {
     top: -4%;
     left: 2%;
     font-size: 72px;
+    padding 5px;
 }
 
 .lap h1 {
