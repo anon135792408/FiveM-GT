@@ -140,8 +140,10 @@ namespace FiveM_GT_Client
         private async void SpawnPlayerInMap(Vector3 position, float heading)
         {
             Vehicle v = await World.CreateVehicle(new Model((int)Player.ChosenVehicleHash), position, heading);
-            await Delay(250);
+            SetFocusArea(v.Position.X, v.Position.Y, v.Position.Z, 0f, 0f, 0f);
+            Game.PlayerPed.Position = v.Position;
             SetPedIntoVehicle(Game.PlayerPed.Handle, v.Handle, -1);
+            ClearFocus();
         }
     }
 }
