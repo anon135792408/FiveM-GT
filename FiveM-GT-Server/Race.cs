@@ -9,25 +9,36 @@ namespace FiveM_GT_Server
 {
     public class Race : BaseScript
     {
+        int CarSelectionTimer = 15; //Timer in Seconds 
         public Race()
         {
             EventHandlers["FiveM-GT:StartRaceForAll"] += new Action<Player, string, int>(StartRaceForAll);
         }
 
-        public void StartRaceForAll([FromSource]Player player, string map, int laps)
+        public async void StartRaceForAll([FromSource]Player player, string map, int laps)
         {
             if (MapManager.MapList.Contains(map))
             {
                 Debug.WriteLine("[FiveM-GT] " + player.Name + " has requested to start a "+laps.ToString()+" lap race with the map '" + map + "'");
-                List<string> spawns = MapManager.LoadMapSpawns(map);
-                if (AssignRaceSpawnPositions(Players, spawns))
-                    TriggerClientEvent("FiveM-GT:StartRace", MapManager.GetMapName(map), laps);
-
 
                 foreach (Player p in Players)
                 {
                     MapManager.SendCheckpointsToPlayer(p, map);
                 }
+
+                Debug.WriteLine("[FiveM-GT] Car selection countdown has started from " + CarSelectionTimer.ToString() + " seconds");
+
+                int timer = CarSelectionTimer;
+                while (timer > 0)
+                {
+                    await Delay(1000);
+                    timer--;
+                    Debug.WriteLine("[FiveM-GT] " + timer.ToString() + " seconds left until race starts");
+                }
+
+                List<string> spawns = MapManager.LoadMapSpawns(map);
+                if (AssignRaceSpawnPositions(Players, spawns))
+                    TriggerClientEvent("FiveM-GT:StartRace", MapManager.GetMapName(map), laps);
             }
             else
             {
