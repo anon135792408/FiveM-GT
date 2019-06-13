@@ -29,6 +29,7 @@ namespace FiveM_GT_Client
             {
                 Debug.WriteLine("[FiveM-GT] Starting "+laps.ToString()+" lap race on map " + map);
                 Laps = laps;
+                CurrentLap = 1;
                 SendNuiMessage("{\"type\":\"SetLaps\",\"Laps\":" + Laps.ToString() + "}");
                 StartRaceIntro();
             }
