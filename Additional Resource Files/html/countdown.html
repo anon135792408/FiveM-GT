@@ -38,6 +38,7 @@
 				<input type="range" min="1" max="100" value="50" class="slider" id="musicSlider">
 				<span id="displayedMusicVolume">50</span>
 			</div>
+			<button onclick="closeModalSave()">Save Changes</button>
 		</div>
 
 	</div>
@@ -109,16 +110,23 @@
 
 		//Set the music volume from a variable passed in from userconfig
 		function setMusicVolume(vol) {
-			musicVolume = parseFloat(vol);
+			musicVolume = parseFloat(vol/100);
 			music.volume = musicVolume;
 		}
 
 		//Set the sfx volume from a variable passed in from userconfig
 		function setSfxVolume(vol) {
-			sfxVolume = parseFloat(vol);
+			sfxVolume = parseFloat(vol/100);
 			introSound.volume = sfxVolume;
 			countdownSound.volume = sfxVolume;
 			finishSound.volume = sfxVolume;
+		}
+
+		function closeModalSave() {
+			$("#soundOptionsModal").hide();
+			$.post('http://fivem-gt/endNuiFocus', JSON.stringify({
+			})
+			);
 		}
 
 		var raceLaps;
@@ -173,7 +181,7 @@
 
 		sfxSlider.oninput = function () {
 			displayedSfxVolume.innerHTML = sfxSlider.value;
-			$.post('http://FiveM-GT/updateSfxVolume', JSON.stringify({ //Lowercase????????
+			$.post('http://fivem-gt/updateSfxVolume', JSON.stringify({
 				sfxVolume: sfxSlider.value
 			})
 			);
@@ -181,7 +189,8 @@
 
 		musicSlider.oninput = function () {
 			displayedMusicVolume.innerHTML = musicSlider.value;
-			$.post('http://FiveM-GT/updateMusicVolume', JSON.stringify({
+			console.log("Woah");
+			$.post('http://fivem-gt/updateMusicVolume', JSON.stringify({
 				musicVolume: musicSlider.value
 			})
 			);

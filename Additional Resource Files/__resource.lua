@@ -1,6 +1,6 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
-resource_type 'gametype' { name = 'FiveM-GT' }
+resource_type 'gametype' { name = 'fivem-gt' }
 
 ui_page('html/countdown.html')
 

@@ -18,6 +18,8 @@ namespace FiveM_GT_Client
 
         private void OnClientResourceStart(string resourceName)
         {
+            SetNuiFocus(false, false);
+
             if (GetCurrentResourceName() != resourceName)
                 return;
 
@@ -45,20 +47,55 @@ namespace FiveM_GT_Client
                 SetNuiFocus(true, true);
             }), false);
 
-            RegisterNUICallback("updateMusicVolume");
-            EventHandlers["updateMusicVolume"] += new Action(UserConfig.SetMusicVolume);
+            RegisterNUICallback("updateMusicVolume", NUI_UpdateMusicVolume);
+            RegisterNUICallback("updateSfxVolume", NUI_UpdateSfxVolume);
+            RegisterNUICallback("endNuiFocus", NUI_EndNuiFocus);
 
             SetUpPlayerConfig();
         }
 
-        private void RegisterNUICallback(string name, Func<IDictionary<string, object>, CallbackDelegate, CallbackDelegate> callback)
+        private void RegisterNUICallback(string msg, Func<IDictionary<string, object>, CallbackDelegate, CallbackDelegate> callback)
         {
-            RegisterNuiCallbackType(name);
+            RegisterNuiCallbackType(msg);
 
-            EventHandlers[$"__cfx_nui:{name}"] += new Action<ExpandoObject, CallbackDelegate>((body, resultCallback) =>
+            EventHandlers[$"__cfx_nui:{msg}"] += new Action<ExpandoObject, CallbackDelegate>((body, resultCallback) =>
             {
-                callback.Invoke(body, resultCallback);
+                CallbackDelegate err = callback.Invoke(body, resultCallback);
             });
+        }
+
+        private CallbackDelegate NUI_UpdateMusicVolume(IDictionary<string, object> data, CallbackDelegate result)
+        {
+            object volume = "";
+
+            if (data.TryGetValue("musicVolume", out volume)) {
+                result("ok");
+                UserConfig.MusicVolume = int.Parse(volume.ToString());
+                Debug.WriteLine("[FiveM-GT] Updating user music volume variable to " + UserConfig.MusicVolume + "...");
+                SendNuiMessage("{\"type\":\"SetMusicVolume\",\"MusicVolume\":" + UserConfig.MusicVolume + "}");
+            }
+            return result;
+        }
+
+        private CallbackDelegate NUI_EndNuiFocus(IDictionary<string, object> data, CallbackDelegate result)
+        {
+            result("ok");
+            SetNuiFocus(false, false);
+            return result;
+        }
+
+        private CallbackDelegate NUI_UpdateSfxVolume(IDictionary<string, object> data, CallbackDelegate result)
+        {
+            object volume = "";
+
+            if (data.TryGetValue("sfxVolume", out volume))
+            {
+                result("ok");
+                UserConfig.SfxVolume = int.Parse(volume.ToString());
+                Debug.WriteLine("[FiveM-GT] Updating user music volume variable to " + UserConfig.SfxVolume + "...");
+                SendNuiMessage("{\"type\":\"SetSfxVolume\",\"SfxVolume\":" + UserConfig.SfxVolume + "}");
+            }
+            return result;
         }
 
         private void SetUpPlayerConfig()
