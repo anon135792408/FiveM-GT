@@ -61,10 +61,9 @@ namespace FiveM_GT_Client
                     }
                     else
                     {
-                        Debug.WriteLine("[FiveM-GT] Passed checkpoint " + CheckpointIndex.ToString() + "!");
+                        Debug.WriteLine("[FiveM-GT] Passed final checkpoint " + CheckpointIndex.ToString() + "!");
                         CheckpointIndex = 0;
                         CurrentCheckpoint = Checkpoints[CheckpointIndex];
-                        CurrentLap++;
                         SendNuiMessage("{\"type\":\"SetRaceCurrentLap\",\"Lap\":" + CurrentLap.ToString() + "}");
                     }
                 }
@@ -93,7 +92,6 @@ namespace FiveM_GT_Client
             SendNuiMessage("{\"type\":\"PlayFinishingSong\",\"enable\":true}");
 
             Player.FollowRaceCoordinates(Checkpoints);
-
         }
 
         private async void StartRaceIntro()
