@@ -14,7 +14,7 @@ server_script {
 }
 
 files {
-    'html/countdown.html',
+	'html/countdown.html',
     'html/countdown-style.css',
 	'html/listener.js',
 	'html/countdown.mp3',

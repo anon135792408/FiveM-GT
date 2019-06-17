@@ -5,10 +5,11 @@
 
 
 	<link rel="stylesheet" href="nui://FiveM-GT/html/countdown-style.css">
+
 </head>
 
-<body hidden>
-	<div class="ui">
+<body>
+	<div id="ui">
 		<h1 id="digits" hidden>x</h1>
 		<div class="position">
 			<h1>1st</h1>
@@ -22,11 +23,53 @@
 		<source src="" type="audio/mpeg">
 	</audio>
 
+	<!-- Modal Stuff for Audio -->
+
+	<div id="soundOptionsModal" class="modal">
+
+		<div class="modal-content">
+			<div>
+				<h5>SFX Volume</h5>
+				<input type="range" min="1" max="100" value="50" class="slider" id="sfxSlider">
+				<span id="displayedSfxVolume">50</span>
+			</div>
+			<div>
+				<h5>Music Volume</h5>
+				<input type="range" min="1" max="100" value="50" class="slider" id="musicSlider">
+				<span id="displayedMusicVolume">50</span>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		// Get the modal
+		var modal = document.getElementById("soundOptionsModal");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			modal.hide();
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+
+
 	<script type="text/javascript">
 
 
 		//Vars
 		var musicVolume = 1;
+		var sfxVolume = 1;
 		var text = ["3", "2", "1", "START"];
 		var counter = 0;
 		var elem = document.getElementById("digits");
@@ -40,17 +83,21 @@
 
 		function startCountdown() {
 			countdownSound.currentTime = 0;
+			countdownSound.volume = sfxVolume;
 			inst = setInterval(change, 1000);
 		}
 
 		function startRaceIntro() {
-			$('body').show();
+			$('#ui').show();
+			$('#digits').hide();
 			introSound.currentTime = 0;
+			introSound.volume = sfxVolume;
 			introSound.play();
 		}
 
 		function playFinishingSong() {
 			finishSound.currentTime = 0;
+			finishSound.volume = sfxVolume;
 			finishSound.play();
 			elem.innerHTML = "FINISH";
 			$('#digits').show();
@@ -63,6 +110,15 @@
 		//Set the music volume from a variable passed in from userconfig
 		function setMusicVolume(vol) {
 			musicVolume = parseFloat(vol);
+			music.volume = musicVolume;
+		}
+
+		//Set the sfx volume from a variable passed in from userconfig
+		function setSfxVolume(vol) {
+			sfxVolume = parseFloat(vol);
+			introSound.volume = sfxVolume;
+			countdownSound.volume = sfxVolume;
+			finishSound.volume = sfxVolume;
 		}
 
 		var raceLaps;
@@ -72,7 +128,7 @@
 		}
 
 		function setRaceCurrentLap(lap) {
-			document.getElementById("lapstring").innerHTML = "Lap "+lap+"/"+raceLaps;
+			document.getElementById("lapstring").innerHTML = "Lap " + lap + "/" + raceLaps;
 		}
 
 		//Update the countdown tiemr
@@ -98,11 +154,39 @@
 				"music/shark.mp3"
 			];
 
-			music = new Audio(sounds[Math.floor(Math.random()*sounds.length)]);
+			music = new Audio(sounds[Math.floor(Math.random() * sounds.length)]);
 			music.currentTime = 0;
 			music.volume = musicVolume;
 			music.play();
 		}
+	</script>
+
+	<script>
+		var sfxSlider = document.getElementById("sfxSlider");
+		var musicSlider = document.getElementById("musicSlider");
+
+		var displayedSfxVolume = document.getElementById("displayedSfxVolume");
+		var displayedMusicVolume = document.getElementById("displayedMusicVolume");
+
+		displayedSfxVolume.innerHTML = sfxSlider.value;
+		displayedMusicVolume.innerHTML = musicSlider.value;
+
+		sfxSlider.oninput = function () {
+			displayedSfxVolume.innerHTML = sfxSlider.value;
+			$.post('http://FiveM-GT/updateSfxVolume', JSON.stringify({ //Lowercase????????
+				sfxVolume: sfxSlider.value
+			})
+			);
+		}
+
+		musicSlider.oninput = function () {
+			displayedMusicVolume.innerHTML = musicSlider.value;
+			$.post('http://FiveM-GT/updateMusicVolume', JSON.stringify({
+				musicVolume: musicSlider.value
+			})
+			);
+		}
+
 	</script>
 
 	<script src="listener.js" type="text/javascript"></script>

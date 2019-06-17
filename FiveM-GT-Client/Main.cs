@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,26 @@ namespace FiveM_GT_Client
                 CamUtils.InitRaceStartCam();
             }), false);
 
+            RegisterCommand("soundoptions", new Action<int, List<object>, string>((source, args, raw) =>
+            {
+                SendNuiMessage("{\"type\":\"ShowSoundOptions\"}");
+                SetNuiFocus(true, true);
+            }), false);
+
+            RegisterNUICallback("updateMusicVolume");
+            EventHandlers["updateMusicVolume"] += new Action(UserConfig.SetMusicVolume);
+
             SetUpPlayerConfig();
+        }
+
+        private void RegisterNUICallback(string name, Func<IDictionary<string, object>, CallbackDelegate, CallbackDelegate> callback)
+        {
+            RegisterNuiCallbackType(name);
+
+            EventHandlers[$"__cfx_nui:{name}"] += new Action<ExpandoObject, CallbackDelegate>((body, resultCallback) =>
+            {
+                callback.Invoke(body, resultCallback);
+            });
         }
 
         private void SetUpPlayerConfig()
